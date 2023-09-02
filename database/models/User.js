@@ -32,8 +32,26 @@ const userSchema = new mongoose.Schema({
     role: {
         type: String,
         enum: ['sub-admin', 'admin'],
-        default: 'admin'
+        default: 'sub-admin',
+        required: [true, "Please provide user role!"],
+        validate: {
+            validator: function (value) {
+                if (value === 'admin') {
+                    return this.constructor.findOne({ role: 'admin' })
+                        .then(user => !user)
+                        .catch(() => false);
+                }
+                return true;
+            },
+            message: "Only one 'admin' role is allowed!",
+        },
     },
+    status: {
+        type: String,
+        required: true,
+        enum: ['pending', 'active', 'block'],
+        default: 'pending',
+    }
 }, {
     timestamps: true,
 });

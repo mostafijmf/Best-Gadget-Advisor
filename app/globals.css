@@ -10,7 +10,70 @@
     }
 }
 
+@layer components {
+    .btn {
+        @apply max-w-full mx-auto text-base font-medium hover:shadow-[0_2px_15px_3px_rgb(0,0,0,0.2)] duration-200 px-10 py-2.5 rounded;
+    }
+
+    .btn-sm {
+        @apply max-w-max mx-auto border px-3 py-1 cursor-pointer rounded duration-200;
+    }
+
+    .btn-primary {
+        @apply bg-primary text-gray-100;
+    }
+
+    .btn-secondary {
+        @apply bg-secondary text-black;
+    }
+
+}
+
+
 .bg_gradient {
     background: rgb(250, 245, 255);
-    background: linear-gradient(130deg, rgb(240, 240, 250) 33%, rgb(239, 255, 245) 66%,rgb(249, 239, 255) 99%);
+    background: linear-gradient(130deg, rgb(240, 240, 250) 33%, rgb(239, 255, 245) 66%, rgb(249, 239, 255) 99%);
 }
+
+
+/* <!-- Hamburger style start --> */
+.hamburger-line {
+    @apply fill-none stroke-gray-200 stroke-[6];
+    transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+        stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hamburger-line1 {
+    stroke-dasharray: 60 207;
+    stroke-width: 6;
+}
+
+.hamburger-line2 {
+    stroke-dasharray: 60 60;
+    stroke-width: 6;
+}
+
+.hamburger-line3 {
+    stroke-dasharray: 60 207;
+    stroke-width: 6;
+}
+
+.hamburger-opened .hamburger-line1 {
+    stroke-dasharray: 90 207;
+    stroke-dashoffset: -134;
+    stroke-width: 6;
+}
+
+.hamburger-opened .hamburger-line2 {
+    stroke-dasharray: 1 60;
+    stroke-dashoffset: -30;
+    stroke-width: 6;
+}
+
+.hamburger-opened .hamburger-line3 {
+    stroke-dasharray: 90 207;
+    stroke-dashoffset: -134;
+    stroke-width: 6;
+}
+
+/* <!-- Hamburger style end --> */

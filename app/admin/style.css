@@ -1,0 +1,11 @@
+
+/* <!-- Sidebar transition -->*/
+/* Sidebar transition properties when open */
+.w-72 {
+    transition: width 0.3s ease-in-out;
+}
+
+/* Sidebar transition properties when closed */
+.w-\[60px\] {
+    transition: width 0.3s ease-in-out;
+}
