@@ -8,10 +8,13 @@ export const formValidator = async ({
     coverPhoto_alt = '',
     pathName = '',
     metaDescription = '',
-    content = ''
+    content = '',
+    comment = '',
+    name = ''
 }, {
     isLogin = false,
     isCreateBlog = false,
+    leaveAReply = false,
 }) => {
     let errors = {};
 
@@ -53,6 +56,18 @@ export const formValidator = async ({
         if (!content) {
             errors.content = 'Content is required!';
         };
+    };
+
+    if (leaveAReply) {
+        if (!comment) {
+            errors.comment = 'Comment is required!';
+        };
+        if (!name) {
+            errors.name = 'Name is required!';
+        };
+        if (!isEmail(email, { domain_specific_validation: true })) {
+            errors.email = 'Invalid email address';
+        }
     };
 
     return errors;

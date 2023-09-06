@@ -1,7 +1,7 @@
-const BtnLoading = () => {
+const BtnLoading = ({ className = 'stroke-gray-100' }) => {
     return (
         <div aria-label="Loading..." role="status" className="flex items-center justify-center space-x-2">
-            <svg className="h-5 w-5 animate-spin stroke-gray-100" viewBox="0 0 256 256">
+            <svg className={`h-5 w-5 animate-spin ${className}`} viewBox="0 0 256 256">
                 <line x1="128" y1="32" x2="128" y2="64" strokeLinecap="round" strokeLinejoin="round" strokeWidth="24"></line>
                 <line x1="195.9" y1="60.1" x2="173.3" y2="82.7" strokeLinecap="round" strokeLinejoin="round"
                     strokeWidth="24"></line>

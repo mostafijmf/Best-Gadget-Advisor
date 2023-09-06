@@ -10,13 +10,22 @@ export const getUser = async () => {
 // <!-- Get All Blogs -->
 export const getBlogs = async (query, page = 1, size = 10) => {
     const res = await fetch(`${url}/api/blogs?query=${query}&page=${page}&size=${size}`, {
-        cache: 'no-store'
+        cache: 'no-store',
+        next: {
+            revalidate: 3
+        }
     });
 
     const data = await res.json();
     if (!res.ok) throw new Error(data.error);
 
     return data
+};
+
+// <!-- Get Search Blogs -->
+export const getSearchBlogs = async (query) => {
+    const res = await axios.get(`/api/search-blogs?query=${query}`);
+    return res.data;
 };
 
 // <!-- Get Blog By PathName -->
@@ -33,6 +42,16 @@ export const getBlogByPathName = async (pathName) => {
 
     return data
 };
+
+
+// <!-- Post leave a reply -->
+export const leaveAReply = async (data) => {
+    const res = await axios.post(`/api/leave-a-reply`, data);
+    return res.data;
+};
+
+
+
 
 
 // <== Admin API Start ==>

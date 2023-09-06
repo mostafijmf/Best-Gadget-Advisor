@@ -21,7 +21,6 @@ export const GET = async (req, { params }) => {
         return NextResponse.json(blog, { status: 200 });
 
     } catch (error) {
-        console.log({ error });
         return NextResponse.json({ error: error.message }, { status: 500 });
     }
 };

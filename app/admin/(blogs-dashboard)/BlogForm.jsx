@@ -40,7 +40,7 @@ const BlogForm = ({ handleSubmit, formData, setFormData, formErrors, loading }) 
         }, 200);
 
         return () => clearTimeout(delayDebounceFn);
-    }, [pathValue]);
+    }, [pathValue, pathData]);
 
 
     // <!-- onChange input -->
@@ -131,6 +131,7 @@ const BlogForm = ({ handleSubmit, formData, setFormData, formErrors, loading }) 
                     name="metaDescription"
                     placeholder="Description should be up to 200 characters..."
                     onChange={handleChange}
+                    maxLength={200}
                     defaultValue={formData.metaDescription}
                     error={formErrors?.metaDescription || ''}
                 />

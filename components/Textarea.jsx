@@ -1,16 +1,25 @@
+'use client'
 import { Icon } from '@iconify/react';
-import React from 'react';
 
-const Textarea = ({ onChange, name, label, placeholder, defaultValue, className, error }) => {
+const Textarea = ({
+    onChange = () => { },
+    name,
+    label,
+    maxLength,
+    placeholder = '',
+    defaultValue = '',
+    className = '',
+    error = ''
+}) => {
     return (
         <div className='w-full text-base'>
             <label htmlFor={name} className='block w-full font-medium mb-0.5'>
-                {label} <sub className='text-sm text-gray-500'>(max 200 characters)</sub>
+                {label}
             </label>
             <textarea
                 name={name}
                 id={name}
-                cols="" rows="3" maxLength={200}
+                cols="" rows="3" maxLength={maxLength}
                 onChange={onChange}
                 placeholder={placeholder}
                 defaultValue={defaultValue}

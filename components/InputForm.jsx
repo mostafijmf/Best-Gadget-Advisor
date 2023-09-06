@@ -6,11 +6,11 @@ const InputForm = ({
     type,
     name,
     accept = '',
-    onChange = '',
+    onChange = () => { },
     placeholder = '',
     className = '',
     defaultValue = '',
-    error
+    error = ''
 }) => {
     return (
         <div className='w-full text-base'>

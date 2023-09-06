@@ -9,7 +9,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body
         suppressHydrationWarning={true}
-        className={inter.className + ' bg-gradient-to-l from-gray-50 from-30% via-emerald-50 via-50% to-blue-50 to-70%'}
+        className={`${inter.className} bg-gradient-to-l from-gray-50 from-30% via-emerald-50 via-50% to-blue-50 to-70%`}
       >
         <Toaster />
         {children}

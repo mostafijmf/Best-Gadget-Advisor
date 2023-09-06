@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 const ErrorComponent = ({ error, reset }) => {
-    console.log(error.message);
     return (
         <main className="container grid place-items-center min-h-full lg:px-8 pt-24 md:pb-40 pb-24">
             <div className="text-center text-primary">

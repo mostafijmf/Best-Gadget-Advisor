@@ -1,8 +1,7 @@
-import { Suspense } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Suspense } from 'react';
 import dayjs from 'dayjs';
-import BlogPostsList from '@/components/BlogPosts/BlogPostsList';
 import Footer from '@/components/Footer';
 import PageLoading from '@/components/Spinners/PageLoading';
 import ResultNotFound from '@/components/ResultNotFound';
@@ -43,7 +42,7 @@ const Home = async () => {
           <h3 className='text-primary lg:text-2xl text-xl font-medium'>Latest Posts</h3>
         </div>
 
-        <div className={`grid grid-cols-4 gap-y-10 gap-x-8 my-6`}>
+        <div className={`grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-y-10 gap-x-8 my-6`}>
           {latestBlogs.length === 0 ?
             <ResultNotFound />
             : <>
@@ -72,7 +71,7 @@ const Home = async () => {
 
               <Link
                 href={`/product-reviews?posts=latest`}
-                className='w-full h-full grid place-items-center rounded-md backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,.12)] group/card'
+                className='w-full h-full py-24 grid place-items-center rounded-md backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,.12)] group/card'
               >
                 <div className='flex items-center gap-2 group-hover/card:gap-3 text-base font-semibold text-primary group-hover/card:text-secondary duration-300'>
                   More post
@@ -89,7 +88,7 @@ const Home = async () => {
           <h3 className='text-primary lg:text-2xl text-xl font-medium'>Popular Posts</h3>
         </div>
 
-        <div className={`grid grid-cols-4 gap-y-10 gap-x-8 my-6`}>
+        <div className={`grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-y-10 gap-x-8 my-6`}>
           {popularBlogs.length === 0 ?
             <ResultNotFound />
             : <>
@@ -117,7 +116,7 @@ const Home = async () => {
               )}
               <Link
                 href={`/product-reviews?posts=popular`}
-                className='w-full h-full grid place-items-center rounded-md backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,.12)] group/card'
+                className='w-full h-full py-24 grid place-items-center rounded-md backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,.12)] group/card'
               >
                 <div className='flex items-center gap-2 group-hover/card:gap-3 text-base font-semibold text-primary group-hover/card:text-secondary duration-300'>
                   More post
