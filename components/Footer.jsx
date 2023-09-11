@@ -8,7 +8,7 @@ const Footer = () => {
                     <h4 className="text-2xl font-medium mb-5 text-center">Disclaimer</h4>
                     <p className="flex flex-col gap-2 text-base tracking-wide">
                         <span>
-                            At Best Gadget Advisor, we strive to provide honest and valuable reviews of various gadgets and products to assist you in making informed purchasing decisions.
+                            At Review Holder, we strive to provide honest and valuable reviews of various gadgets and products to assist you in making informed purchasing decisions.
                         </span>
                         <span>
                             To remain transparent, we want you to know that some of the links on our website are affiliate links, which means that we may earn a commission if you make a purchase through those links. This helps support our website&apos;s maintenance and high-quality content delivery.
@@ -31,7 +31,7 @@ const Footer = () => {
             <div className='py-5 flex justify-center'>
                 <div>
                     <p className='text-base text-gray-600'>
-                        Copyright &copy; {new Date().getFullYear()} Best Gadget Advisor, All Rights Reserved.
+                        Copyright &copy; {new Date().getFullYear()} Review Holder, All Rights Reserved.
                     </p>
                 </div>
             </div>

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import logo from '/public/images/logo/bga-logo.png';
+import logo from '@/public/images/logo/review_holder.png';
 import Responsive from './Responsive';
 import { Icon } from '@iconify/react';
 import SearchModal from '../SearchModal';
@@ -30,16 +30,19 @@ const Navbar = () => {
 
     return (<>
         <nav className='w-full h-[72px] bg-transparent'>
-            <div className={`w-full max-h-full fixed top-0 left-0 ${scroll ? 'border-b border-gray-200 bg-white/50 backdrop-blur-xl' : 'bg-transparent'} z-30 transition-all`}>
-                <div className='container flex justify-between items-center'>
-                    <Link href='/'>
+            <div className={`w-full h-[72px] fixed top-0 left-0 ${scroll ? 'border-b border-gray-200 bg-white/50 backdrop-blur-xl' : 'bg-transparent'} z-30 transition-all`}>
+                <div className='container h-full flex justify-between items-center'>
+                    <Link href='/' className='flex items-center gap-2'>
                         <Image
                             src={logo}
                             alt="BGA Logo"
-                            className='max-md:h-16 max-md:w-auto'
+                            className='h-14 max-md:w-auto'
                             width={0}
-                            height={72}
+                            height={56}
                         />
+                        <p className='text-2xl text-secondary'>
+                            Review Holder
+                        </p>
                     </Link>
                     <ul className='flex justify-between gap-8 list-none text-primary text-lg max-lg:hidden'>
                         <li>

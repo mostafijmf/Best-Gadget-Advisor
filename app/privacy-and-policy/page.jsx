@@ -19,7 +19,7 @@ const PrivacyAndPolicy = () => {
         <section className='bg-white w-full'>
             <div className='container max-w-2xl mx-auto pt-10 pb-20 text-lg'>
                 <p>
-                    At <strong>Best Gadget Advisor</strong>, we value your privacy and are committed to protecting your personal information. This Privacy Policy outlines how we collect, use, and safeguard your data when you use our website.
+                    At <strong>Review Holder</strong>, we value your privacy and are committed to protecting your personal information. This Privacy Policy outlines how we collect, use, and safeguard your data when you use our website.
                 </p>
                 <br />
                 <h4 className='text-2xl font-semibold pb-2'>

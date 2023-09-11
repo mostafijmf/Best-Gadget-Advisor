@@ -19,7 +19,7 @@ const About = () => {
         <section className="pt-10 pb-20 bg-white">
             <div className="container max-w-2xl mx-auto text-lg text-gray-600">
                 <p className="text-xl font-semibold pb-5 text-primary">
-                    Welcome to Best Gadget Advisor!
+                    Welcome to Review Holder!
                 </p>
                 <p>
                     We are passionate about gadgets and technology, and we understand how overwhelming it can be to find the perfect product that suits your needs. That&apos;s why we started this journey—to help you make well-informed decisions when it comes to buying gadgets and products.
@@ -48,7 +48,7 @@ const About = () => {
                 </p>
                 <br />
                 <p>
-                    Thank you for choosing <strong>Best Gadget Advisor</strong> as your trusted guide in the world of technology.
+                    Thank you for choosing <strong>Review Holder</strong> as your trusted guide in the world of technology.
                 </p>
                 <br />
                 <p>
@@ -56,7 +56,7 @@ const About = () => {
                 </p>
                 <br />
                 <p>
-                    <strong>The Best Gadget Advisor Team</strong>
+                    <strong>The Review Holder Team</strong>
                     <br />
                     <span className="text-base">05-08-2023</span>
                 </p>

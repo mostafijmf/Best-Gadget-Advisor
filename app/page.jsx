@@ -10,7 +10,7 @@ import Navbar from '@/components/Navbar/Navbar';
 import Icons from '@/components/Icons';
 
 export const metadata = {
-  title: 'Home | Best Gadget Advisor',
+  title: 'Home',
   description: 'We are here To Make It Easier To Find The Best Product For Your Needs.'
 };
 
