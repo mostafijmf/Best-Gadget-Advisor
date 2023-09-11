@@ -10,7 +10,7 @@ export const getUser = async () => {
 // <!-- Get All Blogs -->
 export const getBlogs = async (query, page = 1, size = 10) => {
     const res = await fetch(`${url}/api/blogs?query=${query}&page=${page}&size=${size}`, {
-        cache: 'no-store',
+        // cache: 'no-store',
         next: {
             revalidate: 3
         }
