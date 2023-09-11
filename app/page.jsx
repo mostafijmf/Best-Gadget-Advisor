@@ -9,6 +9,8 @@ import { getBlogs } from '@/libs/apiServices';
 import Navbar from '@/components/Navbar/Navbar';
 import Icons from '@/components/Icons';
 
+export const runtime = "edge";
+
 export const metadata = {
   title: 'Home',
   description: 'We are here To Make It Easier To Find The Best Product For Your Needs.'
