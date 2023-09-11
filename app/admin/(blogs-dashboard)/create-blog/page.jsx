@@ -7,8 +7,6 @@ import BlogForm from "../BlogForm";
 import { scrollToElement } from "@/libs/scrollToElement";
 import { useRouter } from "next/navigation";
 
-export const metadata = { title: 'Create Blog | Admin Dashboard' };
-
 
 const CreateBlog = () => {
     const [formData, setFormData] = useState({

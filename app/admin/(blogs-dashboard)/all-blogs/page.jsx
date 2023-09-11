@@ -10,8 +10,6 @@ import useGetAdminBlogs from "@/hooks/useApi/useGetAdminBlogs";
 import ConfirmModal from "@/components/ConfirmModal";
 import ResultNotFound from "@/components/ResultNotFound";
 
-export const metadata = { title: 'All Blogs List | Admin Dashboard' }
-
 
 const AllBlogs = () => {
     const [blogs, loading] = useGetAdminBlogs();

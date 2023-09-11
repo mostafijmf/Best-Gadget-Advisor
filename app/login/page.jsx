@@ -7,8 +7,6 @@ import { loginAdmin } from '@/libs/apiServices';
 import InputForm from '@/components/InputForm';
 import BtnLoading from '@/components/Spinners/BtnLoading';
 
-export const metadata = { title: 'Login' };
-
 const AdminLogin = () => {
     const [formData, setFormData] = useState({ email: '', password: '' });
     const [formErrors, setFormErrors] = useState({});
