@@ -32,13 +32,13 @@ const Navbar = () => {
         <nav className='w-full h-[72px] bg-transparent'>
             <div className={`w-full h-[72px] fixed top-0 left-0 ${scroll ? 'border-b border-gray-200 bg-white/50 backdrop-blur-xl' : 'bg-transparent'} z-30 transition-all`}>
                 <div className='container h-full flex justify-between items-center'>
-                    <Link href='/' className='flex items-center gap-2'>
+                    <Link href='/' className='flex items-center gap-1'>
                         <Image
                             src={logo}
                             alt="BGA Logo"
-                            className='h-14 max-md:w-auto'
-                            width={0}
-                            height={56}
+                            className='w-14 h-10'
+                            width={56}
+                            height={40}
                         />
                         <p className='text-2xl text-secondary'>
                             Review Holder
@@ -48,7 +48,7 @@ const Navbar = () => {
                         <li>
                             <Link
                                 href={'/'}
-                                className={`hover:text-secondary duration-200 hover:border-b border-secondary ${currentPath === '/' && 'text-secondary border-b'}`}
+                                className={`hover:text-secondary duration-200 hover:border-b border-secondary ${currentPath === '/' ? 'text-secondary border-b' : ''}`}
                             >
                                 Home
                             </Link>
@@ -56,7 +56,7 @@ const Navbar = () => {
                         <li>
                             <Link
                                 href={'/product-reviews'}
-                                className={`hover:text-secondary duration-200 hover:border-b border-secondary ${currentPath === '/product-reviews' && 'text-secondary border-b'}`}
+                                className={`hover:text-secondary duration-200 hover:border-b border-secondary ${currentPath === '/product-reviews' ? 'text-secondary border-b' : ''}`}
                             >
                                 Product Reviews
                             </Link>
@@ -64,7 +64,7 @@ const Navbar = () => {
                         <li>
                             <Link
                                 href={'/contact'}
-                                className={`hover:text-secondary duration-200 hover:border-b border-secondary ${currentPath === '/contact' && 'text-secondary border-b'}`}
+                                className={`hover:text-secondary duration-200 hover:border-b border-secondary ${currentPath === '/contact' ? 'text-secondary border-b' : ''}`}
                             >
                                 Contact
                             </Link>
@@ -72,7 +72,7 @@ const Navbar = () => {
                         <li>
                             <Link
                                 href={'/about'}
-                                className={`hover:text-secondary duration-200 hover:border-b border-secondary ${currentPath === '/about' && 'text-secondary border-b'}`}
+                                className={`hover:text-secondary duration-200 hover:border-b border-secondary ${currentPath === '/about' ? 'text-secondary border-b' : ''}`}
                             >
                                 About
                             </Link>

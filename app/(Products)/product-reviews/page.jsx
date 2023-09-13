@@ -17,7 +17,7 @@ const ProductReviews = async ({ searchParams }) => {
     return (<>
         <div className='container mt-20 mb-28'>
             <section>
-                <div className='flex items-center max-sm:justify-between lg:gap-8 gap-5 border-b-4 border-primary lg:text-2xl text-xl font-medium text-primary pb-2'>
+                <div className='flex items-center max-sm:justify-between lg:gap-8 gap-5 border-b-4 border-primary lg:text-2xl sm:text-xl text-base font-medium text-primary pb-2'>
                     <Link
                         href={'/product-reviews'}
                         className={`cursor-pointer ${(query !== 'latest' && query !== 'popular') && 'text-secondary'}`}

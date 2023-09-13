@@ -64,7 +64,7 @@ const CreateBlog = () => {
 
 
     return (
-        <div className="py-10 pr-5">
+        <div className="py-10">
             <h1 className="text-3xl font-semibold text-primary text-center">Create Blog</h1>
             <BlogForm
                 handleSubmit={handleCreateBlog}

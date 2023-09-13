@@ -1,14 +1,15 @@
 import dayjs from 'dayjs';
 import Image from 'next/image';
 import Link from 'next/link';
+import BlogCard from './BlogCard';
 
 const BlogPostsList = ({ blogs }) => {
 
     return (<>
         <div className='max-w-4xl w-full flex flex-col md:gap-10 gap-7'>
             {
-                blogs?.map(blog =>
-                    <div key={blog._id} className='flex items-start md:gap-7 gap-5'>
+                blogs?.map(blog => <>
+                    <div key={blog._id} className='flex items-start gap-7 max-md:hidden'>
                         <div className='w-max'>
                             <Link href={blog.pathName} className='hover:bg-white'>
                                 <Image
@@ -16,16 +17,16 @@ const BlogPostsList = ({ blogs }) => {
                                     alt={blog.coverPhoto_alt}
                                     width={240}
                                     height={100}
-                                    className='md:w-60 sm:w-52 w-40 h-auto'
+                                    className='w-60 h-auto'
                                 />
                             </Link>
                         </div>
-                        <div className='md:w-[calc(100%-240px)] sm:w-[calc(100%-208px)] w-[calc(100%-160px)] text-primary'>
+                        <div className='w-[calc(100%-240px)] text-primary'>
                             <div>
                                 <Link href={blog.pathName} className='text-2xl font-semibold hover:underline'>
                                     {blog.title}
                                 </Link>
-                                <p className='text-lg max-md:hidden my-3'>
+                                <p className='text-lg my-3'>
                                     {blog.metaDescription}
                                 </p>
                                 <p className='text-sm text-gray-500'>
@@ -34,6 +35,8 @@ const BlogPostsList = ({ blogs }) => {
                             </div>
                         </div>
                     </div>
+                    <BlogCard key={blog._id} blog={blog} className="md:hidden max-w-sm mx-auto" />
+                </>
                 )
             }
         </div>

@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { Icon } from "@iconify/react";
@@ -14,7 +15,7 @@ const Sidebar = () => {
     const itemsStyle = 'w-full h-auto py-3 px-5 text-base hover:bg-[#0c102a] duration-300 relative rounded flex items-center gap-3';
     const itemsTextStyle = (openSidebar ? 'scale-100' : 'scale-0') + ' whitespace-nowrap origin-left duration-300';
 
-    
+
     // <!-- Logout -->
     const handleLogout = async () => {
         try {
@@ -35,7 +36,8 @@ const Sidebar = () => {
     };
 
     return (<>
-        <aside className={`sticky top-0 left-0 h-full bg-primary ${openSidebar ? 'w-72 p-6' : 'w-[60px]'} duration-300`}>
+        <div className={`lg:hidden ${openSidebar ? 'w-[60px]' : 'hidden'}`} />
+        <aside className={`sticky top-0 left-0 h-full bg-primary ${openSidebar ? 'w-72 p-6 max-lg:fixed z-50' : 'w-[60px]'} duration-300`}>
 
             {/* <!-- Hamburger Btn --> */}
             <div className={`absolute top-4 ${openSidebar ? 'right-4' : 'right-0 w-full grid place-items-center'}`}>

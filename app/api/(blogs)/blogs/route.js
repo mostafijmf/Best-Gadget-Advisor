@@ -15,18 +15,20 @@ export const GET = async (req) => {
         const limit = parseInt(size);
 
         // <!-- Get sorted Blogs with Aggregation Pipeline -->
-        let aggregationPipeline = [
-            { $match: { status: 'active' } },
-            { $skip: skip },
-            { $limit: limit }
-        ];
+        let aggregationPipeline = [{ $match: { status: 'active' } }];
+        
         if (query === 'latest') aggregationPipeline.splice(1, 0, { $sort: { createdAt: -1 } });
         if (query === 'popular') aggregationPipeline.splice(1, 0, { $sort: { views: -1 } });
+        if (query !== 'all') {
+            aggregationPipeline = aggregationPipeline.concat([
+                { $skip: skip },
+                { $limit: limit }
+            ]);
+        };
 
         const blogs = await Blog.aggregate(aggregationPipeline);
         const blogLength = await Blog.countDocuments();
         const totalPage = Math.ceil(blogLength / size);
-
         return NextResponse.json({ blogs, totalPage }, { status: 200 });
 
     } catch (error) {

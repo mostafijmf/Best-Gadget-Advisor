@@ -76,7 +76,7 @@ const AllBlogs = () => {
                 (blogs.length === 0 ?
                     <ResultNotFound />
                     :
-                    <div className="max-w-full my-5 mr-5">
+                    <div className="max-w-full my-5">
                         <div className="mb-5">
                             <InputForm placeholder="🔍 Search blog by title" className="bg-white/50 max-w-md" />
                         </div>

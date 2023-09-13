@@ -11,8 +11,11 @@ export const generateMetadata = async ({ params }) => {
     const blog = await getBlogByPathName(pathName);
 
     return {
-        title: blog?.title || 'Title',
+        title: blog?.title || '',
         description: blog?.metaDescription || '',
+        alternates: {
+            canonical: `https://www.reviewholder.com${blog?.pathName}`,
+        },
     }
 }
 

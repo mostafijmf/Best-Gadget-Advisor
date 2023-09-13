@@ -40,7 +40,7 @@ const BlogForm = ({ handleSubmit, formData, setFormData, formErrors, loading }) 
         }, 200);
 
         return () => clearTimeout(delayDebounceFn);
-    }, [pathValue, pathData]);
+    }, [pathValue]);
 
 
     // <!-- onChange input -->
@@ -61,7 +61,7 @@ const BlogForm = ({ handleSubmit, formData, setFormData, formErrors, loading }) 
         <div>
             <form
                 onSubmit={handleSubmit}
-                className='max-w-full mx-auto border rounded-md my-6 p-9 flex flex-col gap-5 text-primary'
+                className='max-w-full mx-auto border rounded-md my-6 sm:p-9 p-5 flex flex-col gap-5 text-primary'
             >
                 <InputForm
                     label="Title"
@@ -74,7 +74,7 @@ const BlogForm = ({ handleSubmit, formData, setFormData, formErrors, loading }) 
                     <p className='block w-full font-medium mb-0.5'>
                         Cover Photo
                     </p>
-                    <div className="flex items-start gap-5">
+                    <div className="flex items-start max-sm:flex-col sm:gap-5 gap-2">
                         <InputForm
                             label="Select a photo"
                             type="file" name="coverPhoto_src"

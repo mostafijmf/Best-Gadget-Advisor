@@ -15,7 +15,7 @@ const Footer = () => {
                         </span>
                     </p>
                 </div>
-                <ul className="list-none flex items-center justify-center gap-10 mt-10 font-semibold">
+                <ul className="list-none flex items-center justify-center md:gap-10 gap-8 mt-10 font-semibold">
                     <li>
                         <Link href='/about' className="hover:underline">About</Link>
                     </li>
@@ -28,12 +28,10 @@ const Footer = () => {
                 </ul>
             </div>
 
-            <div className='py-5 flex justify-center'>
-                <div>
-                    <p className='text-base text-gray-600'>
-                        Copyright &copy; {new Date().getFullYear()} Review Holder, All Rights Reserved.
-                    </p>
-                </div>
+            <div className='container py-5 text-center'>
+                <p className='text-base text-gray-600'>
+                    Copyright &copy; {new Date().getFullYear()} Review Holder, All Rights Reserved.
+                </p>
             </div>
         </footer>
     );

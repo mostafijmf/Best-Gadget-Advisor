@@ -1,19 +1,15 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Suspense } from 'react';
-import dayjs from 'dayjs';
 import Footer from '@/components/Footer';
 import PageLoading from '@/components/Spinners/PageLoading';
 import ResultNotFound from '@/components/ResultNotFound';
 import { getBlogs } from '@/libs/apiServices';
 import Navbar from '@/components/Navbar/Navbar';
 import Icons from '@/components/Icons';
+import BlogCard from '@/components/BlogPosts/BlogCard';
 
-export const metadata = {
-  title: 'Home',
-  description: 'We are here To Make It Easier To Find The Best Product For Your Needs.'
-};
-
+export const runtime = "edge";
 
 const Home = async () => {
   const [
@@ -46,29 +42,9 @@ const Home = async () => {
           {latestBlogs.length === 0 ?
             <ResultNotFound />
             : <>
-              {latestBlogs.map(blog =>
-                <div key={blog._id} className='w-full h-min rounded-md overflow-hidden bg-white shadow-[0_8px_30px_rgba(0,0,0,.12)] mx-auto group/card'>
-                  <Link href={blog.pathName} className='w-full h-full block'>
-                    <div className='w-full h-44'>
-                      <Image
-                        src={blog.coverPhoto_src}
-                        alt={blog.coverPhoto_alt}
-                        width={240}
-                        height={180}
-                        className='w-full h-full object-cover'
-                      />
-                    </div>
-                    <div className='w-full px-5 py-3'>
-                      <h4 className='text-lg text-primary font-semibold group-hover/card:underline'>{blog.title}</h4>
-                      <p className='text-sm text-gray-600 my-2'>{blog.metaDescription}</p>
-                      <p className='text-sm text-gray-600'>
-                        {dayjs(blog.createdAt).format("DD-MMM-YYYY")}
-                      </p>
-                    </div>
-                  </Link>
-                </div>
-              )}
-
+              {
+                latestBlogs.map(blog => <BlogCard blog={blog} key={blog._id} />)
+              }
               <Link
                 href={`/product-reviews?posts=latest`}
                 className='w-full h-full py-24 grid place-items-center rounded-md backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,.12)] group/card'
@@ -92,28 +68,9 @@ const Home = async () => {
           {popularBlogs.length === 0 ?
             <ResultNotFound />
             : <>
-              {popularBlogs.map(blog =>
-                <div key={blog._id} className='w-full h-min rounded-md overflow-hidden bg-white shadow-[0_8px_30px_rgba(0,0,0,.12)] mx-auto group/card'>
-                  <Link href={blog.pathName} className='w-full h-full block'>
-                    <div className='w-full h-44'>
-                      <Image
-                        src={blog.coverPhoto_src}
-                        alt={blog.coverPhoto_alt}
-                        width={240}
-                        height={180}
-                        className='w-full h-full object-cover'
-                      />
-                    </div>
-                    <div className='w-full px-5 py-3'>
-                      <h4 className='text-lg text-primary font-semibold group-hover/card:underline'>{blog.title}</h4>
-                      <p className='text-sm text-gray-600 my-2'>{blog.metaDescription}</p>
-                      <p className='text-sm text-gray-600'>
-                        {dayjs(blog.createdAt).format("DD-MMM-YYYY")}
-                      </p>
-                    </div>
-                  </Link>
-                </div>
-              )}
+              {
+                popularBlogs.map(blog => <BlogCard blog={blog} key={blog._id} />)
+              }
               <Link
                 href={`/product-reviews?posts=popular`}
                 className='w-full h-full py-24 grid place-items-center rounded-md backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,.12)] group/card'
