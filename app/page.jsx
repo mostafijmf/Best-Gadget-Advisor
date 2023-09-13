@@ -10,6 +10,15 @@ import Icons from '@/components/Icons';
 import BlogCard from '@/components/BlogPosts/BlogCard';
 
 export const runtime = "edge";
+<<<<<<< HEAD
+=======
+
+export const metadata = {
+  title: 'Home',
+  description: 'We are here To Make It Easier To Find The Best Product For Your Needs.'
+};
+
+>>>>>>> origin/main
 
 const Home = async () => {
   const [
