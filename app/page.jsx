@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { Suspense } from 'react';
 import Footer from '@/components/Footer';
 import PageLoading from '@/components/Spinners/PageLoading';
@@ -10,15 +9,6 @@ import Icons from '@/components/Icons';
 import BlogCard from '@/components/BlogPosts/BlogCard';
 
 export const runtime = "edge";
-<<<<<<< HEAD
-=======
-
-export const metadata = {
-  title: 'Home',
-  description: 'We are here To Make It Easier To Find The Best Product For Your Needs.'
-};
-
->>>>>>> origin/main
 
 const Home = async () => {
   const [
