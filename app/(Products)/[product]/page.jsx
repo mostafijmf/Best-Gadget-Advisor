@@ -17,7 +17,7 @@ export const generateMetadata = async ({ params }) => {
             canonical: `https://www.reviewholder.com${blog?.pathName}`,
         },
     }
-}
+};
 
 
 const Products = async ({ params }) => {
@@ -25,15 +25,19 @@ const Products = async ({ params }) => {
     const blog = await getBlogByPathName(pathName);
 
     return (<>
-        <Navbar />
-        <Suspense fallback={<PageLoading />}>
-            <section className='container mt-14 mb-10'>
-                <BlogPage data={blog} />
-            </section>
-            <section className='container'>
-                <LeaveAReply blog={blog} />
-            </section>
-        </Suspense>
+        <Navbar/>
+        <main>
+            <div className='container max-w-[48rem] mx-auto'>
+                <Suspense fallback={<PageLoading />}>
+                    <section className='mb-20 mt-14'>
+                        <BlogPage data={blog} />
+                    </section>
+                    <section className='mb-28'>
+                        <LeaveAReply blog={blog} />
+                    </section>
+                </Suspense>
+            </div>
+        </main>
         <Footer />
     </>);
 };

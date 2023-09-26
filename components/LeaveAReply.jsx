@@ -57,7 +57,7 @@ const LeaveAReply = ({ blog }) => {
 
 
     return (
-        <div className='max-w-2xl mx-auto rounded-md border border-primary p-7 my-20'>
+        <div className='w-full rounded-md border border-primary md:p-7 p-5'>
             <div>
                 <h2 className="text-xl font-black text-primary">Leave a Reply</h2>
                 <p className="text-lg text-primary mt-3">
@@ -96,7 +96,7 @@ const LeaveAReply = ({ blog }) => {
                     onChange={handleChange}
                 />
                 <div className="pt-5 pb-2">
-                    <button type="submit" className="btn btn-primary" disabled={loading} >
+                    <button type="submit" className="btn btn-primary" disabled={loading} aria-label="Submit">
                         {
                             loading ? <BtnLoading /> : 'Submit'
                         }

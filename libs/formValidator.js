@@ -13,6 +13,8 @@ export const formValidator = async ({
     name = ''
 }, {
     isLogin = false,
+    isUpdateAccInfo = false,
+    isActivateUser = false,
     isCreateBlog = false,
     leaveAReply = false,
 }) => {
@@ -23,6 +25,30 @@ export const formValidator = async ({
             errors.email = 'Invalid email address';
         }
 
+        if (!isStrongPassword(password, {
+            minLength: 8,
+            minLowercase: 1,
+            minUppercase: 1,
+            minNumbers: 1,
+            minSymbols: 1,
+        })) {
+            errors.password = 'Password must have at least 8 characters, one Lowercase, one Uppercase, one Number, and one Symbol';
+        };
+    };
+
+    if (isUpdateAccInfo) {
+        if (!isEmail(email, { domain_specific_validation: true })) {
+            errors.email = 'Invalid email address';
+        }
+        if (!name) {
+            errors.name = 'Name is required!';
+        };
+    };
+
+    if (isActivateUser) {
+        if (!name) {
+            errors.name = 'Name is required!';
+        };
         if (!isStrongPassword(password, {
             minLength: 8,
             minLowercase: 1,

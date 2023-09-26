@@ -37,62 +37,62 @@ const ProductReviews = async ({ searchParams }) => {
                         Popular Posts
                     </Link>
                 </div>
-                <div className='py-10'>
-                    <Suspense fallback={<PageLoading />}>
-                        {blogs.length === 0 ?
-                            <ResultNotFound /> : <>
-                                <BlogPostsList blogs={blogs} />
-                                {/* <!-- Pagination --> */}
-                                {totalPage > 1 &&
-                                    <div className='w-max mx-auto mt-24'>
-                                        <ul className='list-none flex items-center gap-2 text-gray-700'>
-                                            <li className="grid place-items-center">
-                                                {page !== 1 ?
-                                                    <Link
-                                                        href={`/product-reviews?${query && `posts=${query}`}&page=${page - 1}`}
-                                                        className={`bg-primary text-white duration-200 mr-3 px-2.5 py-2 rounded`}
-                                                    >
-                                                        <Icons icon="ep:arrow-left-bold" width="20" />
-                                                    </Link>
-                                                    :
-                                                    <div className={`bg-gray-300 text-white duration-200 mr-3 px-2.5 py-2 rounded`}>
-                                                        <Icons icon="ep:arrow-left-bold" width="20" />
-                                                    </div>
-                                                }
-                                            </li>
-                                            {
-                                                [...Array(totalPage).keys()].map(item =>
-                                                    <li key={item}>
-                                                        <Link
-                                                            href={`/product-reviews?${query && `posts=${query}`}&page=${item + 1}`}
-                                                            className={`${page === item + 1 ? 'bg-primary text-white' : 'text-primary'} py-1.5 px-3 rounded`}
-                                                        >
-                                                            {item + 1}
-                                                        </Link>
-                                                    </li>
-                                                )
+            </section>
+            <section className='py-10'>
+                <Suspense fallback={<PageLoading />}>
+                    {blogs.length === 0 ?
+                        <ResultNotFound /> : <>
+                            <BlogPostsList blogs={blogs} />
+                            {/* <!-- Pagination --> */}
+                            {totalPage > 1 &&
+                                <div className='w-max mx-auto mt-24'>
+                                    <ul className='list-none flex items-center gap-2 text-gray-700'>
+                                        <li className="grid place-items-center">
+                                            {page !== 1 ?
+                                                <Link
+                                                    href={`/product-reviews?${query && `posts=${query}`}&page=${page - 1}`}
+                                                    className={`bg-primary text-white duration-200 mr-3 px-2.5 py-2 rounded`}
+                                                >
+                                                    <Icons icon="ep:arrow-left-bold" width="20" />
+                                                </Link>
+                                                :
+                                                <div className={`bg-gray-300 text-white duration-200 mr-3 px-2.5 py-2 rounded`}>
+                                                    <Icons icon="ep:arrow-left-bold" width="20" />
+                                                </div>
                                             }
-                                            <li className="grid place-items-center">
-                                                {totalPage !== page ?
+                                        </li>
+                                        {
+                                            [...Array(totalPage).keys()].map(item =>
+                                                <li key={item}>
                                                     <Link
-                                                        href={`/product-reviews?${query && `posts=${query}`}&page=${page + 1}`}
-                                                        className={`bg-primary text-white duration-200 ml-3 px-2.5 py-2 rounded`}
+                                                        href={`/product-reviews?${query && `posts=${query}`}&page=${item + 1}`}
+                                                        className={`${page === item + 1 ? 'bg-primary text-white' : 'text-primary'} py-1.5 px-3 rounded`}
                                                     >
-                                                        <Icons icon="ep:arrow-right-bold" width="20" />
+                                                        {item + 1}
                                                     </Link>
-                                                    :
-                                                    <div className={`bg-gray-300 text-white duration-200 ml-3 px-2.5 py-2 rounded`}>
-                                                        <Icons icon="ep:arrow-right-bold" width="20" />
-                                                    </div>
-                                                }
-                                            </li>
-                                        </ul>
-                                    </div >
-                                }
-                            </>
-                        }
-                    </Suspense>
-                </div>
+                                                </li>
+                                            )
+                                        }
+                                        <li className="grid place-items-center">
+                                            {totalPage !== page ?
+                                                <Link
+                                                    href={`/product-reviews?${query && `posts=${query}`}&page=${page + 1}`}
+                                                    className={`bg-primary text-white duration-200 ml-3 px-2.5 py-2 rounded`}
+                                                >
+                                                    <Icons icon="ep:arrow-right-bold" width="20" />
+                                                </Link>
+                                                :
+                                                <div className={`bg-gray-300 text-white duration-200 ml-3 px-2.5 py-2 rounded`}>
+                                                    <Icons icon="ep:arrow-right-bold" width="20" />
+                                                </div>
+                                            }
+                                        </li>
+                                    </ul>
+                                </div >
+                            }
+                        </>
+                    }
+                </Suspense>
             </section>
         </div>
     </>);

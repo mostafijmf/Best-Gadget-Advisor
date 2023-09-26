@@ -15,12 +15,13 @@ export async function POST(req) {
 
         const isCorrectPass = await bcrypt.compare(password, user.password);
         if (!isCorrectPass) return NextResponse.json({ error: "Incorrect password!" }, { status: 401 });
+        if (user.status !== 'active') return NextResponse.json({ error: "" }, { status: 403 });
 
-        const token = await new SignJWT({ id: user._id })
+        const token = await new SignJWT({ id: user._id, role: user.role })
             .setProtectedHeader({ alg: 'HS256' })
             .setIssuedAt()
             .setExpirationTime('1d')
-            .sign(new TextEncoder().encode(process.env.JWT_ACCESS_TOKEN));
+            .sign(new TextEncoder().encode(process.env.NEXT_PUBLIC_JWT_ACCESS_TOKEN));
 
         const response = NextResponse.json({ success: "Login successful!" }, { status: 200 });
 

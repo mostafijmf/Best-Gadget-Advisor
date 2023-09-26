@@ -4,7 +4,6 @@ import sharp from "sharp";
 import fs from "fs/promises";
 import { resolve } from 'path';
 import Blog from "@/database/models/Blog";
-import User from "@/database/models/User";
 import { dbConnect } from "@/database/dbConnect";
 import convertStr from "@/libs/convertStr";
 
@@ -14,9 +13,8 @@ dbConnect();
 export const GET = async (req, { params }) => {
     try {
         // <!-- Checking user role for admin -->
-        const userId = headers().get('userId');
-        const isUser = await User.findById({ _id: userId });
-        if (isUser.role !== 'admin') {
+        const { role } = JSON.parse(headers().get('userInfo'));
+        if (!['admin', 'sub-admin'].includes(role)) {
             return NextResponse.json({ error: "You are not allowed for this route!" }, { status: 403 })
         };
 
@@ -37,13 +35,12 @@ export const GET = async (req, { params }) => {
 export const PATCH = async (req, { params }) => {
     try {
         // <!-- Checking user role for admin -->
-        const userId = headers().get('userId');
-        const isUser = await User.findById({ _id: userId });
-        if (isUser.role !== 'admin') {
+        const { role } = JSON.parse(headers().get('userInfo'));
+        if (!['admin', 'sub-admin'].includes(role)) {
             return NextResponse.json({ error: "You are not allowed for this route!" }, { status: 403 })
         };
 
-        // <!-- Creating a Blog -->
+        // <!-- Blog Data -->
         const formData = await req.formData();
         const body = {};
         for (const [name, value] of formData.entries()) {
@@ -97,20 +94,24 @@ export const PATCH = async (req, { params }) => {
 // <!-- Delete a blog by ID -->
 export const DELETE = async (req, { params }) => {
     try {
-        // <!-- Checking user role for admin -->
-        const userId = headers().get('userId');
-        const isUser = await User.findById({ _id: userId });
-        if (isUser.role !== 'admin') {
+        // <!-- Checking user role for 'admin' or 'sub-admin' -->
+        const { id, role } = JSON.parse(headers().get('userInfo'));
+        if (!['admin', 'sub-admin'].includes(role)) {
             return NextResponse.json({ error: "You are not allowed for this route!" }, { status: 403 })
         };
 
-        const blog = await Blog.findById({ _id: params.id });
-        if (blog) {
-            const imageName = await blog.coverPhoto_src.replace(/^\/blogs\/cover_photo\//, '');
-            await fs.unlink(resolve('./public/blogs/cover_photo', imageName));
-            await Blog.findByIdAndDelete({ _id: params.id });
+        const blog = await Blog.findById({ _id: params.id }).populate('author');
 
-            return NextResponse.json({ success: "Delete successful!" }, { status: 200 });
+        if (blog) {
+            if ((blog.author._id.equals(id)) || (role === 'admin')) {
+                const imageName = await blog.coverPhoto_src.replace(/^\/blogs\/cover_photo\//, '');
+                await fs.unlink(resolve('./public/blogs/cover_photo', imageName));
+                await Blog.findByIdAndDelete({ _id: params.id });
+
+                return NextResponse.json({ success: "Delete successful!" }, { status: 200 });
+            } else {
+                return NextResponse.json({ error: "You have no right to delete this blog!" }, { status: 403 });
+            }
         }
         else {
             return NextResponse.json({ error: "Something went wrong!" }, { status: 404 })

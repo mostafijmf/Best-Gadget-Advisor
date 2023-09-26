@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const BlogCard = ({ blog, className = "" }) => {
     return (
-        <div className={`w-full h-min rounded-md overflow-hidden bg-white shadow-[0_8px_30px_rgba(0,0,0,.12)] mx-auto group/card ${className}`}>
+        <article className={`w-full h-min rounded-md overflow-hidden bg-white shadow-[0_8px_30px_rgba(0,0,0,.12)] mx-auto group/card ${className}`}>
             <Link href={blog.pathName} className='w-full h-full block'>
                 <div className='w-full h-44'>
                     <Image
@@ -18,12 +18,12 @@ const BlogCard = ({ blog, className = "" }) => {
                 <div className='w-full px-5 py-3'>
                     <h4 className='text-lg text-primary font-semibold group-hover/card:underline'>{blog.title}</h4>
                     <p className='text-sm text-gray-600 my-2'>{blog.metaDescription}</p>
-                    <p className='text-sm text-gray-600'>
+                    <time className='text-sm text-gray-600'>
                         {dayjs(blog.createdAt).format("DD-MMM-YYYY")}
-                    </p>
+                    </time>
                 </div>
             </Link>
-        </div>
+        </article>
     );
 };
 

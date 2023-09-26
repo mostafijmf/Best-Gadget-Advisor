@@ -8,7 +8,7 @@ import Responsive from './Responsive';
 import { Icon } from '@iconify/react';
 import SearchModal from '../SearchModal';
 
-const Navbar = () => {
+const Navbar = ({className= 'bg-transparent'}) => {
     const [scroll, setScroll] = useState(false);
     const [openMenu, setOpenMenu] = useState(false);
     const [openSearchModal, setOpenSearchModal] = useState(false);
@@ -29,7 +29,7 @@ const Navbar = () => {
 
 
     return (<>
-        <nav className='w-full h-[72px] bg-transparent'>
+        <nav className={`w-full h-[72px] ${className}`}>
             <div className={`w-full h-[72px] fixed top-0 left-0 ${scroll ? 'border-b border-gray-200 bg-white/50 backdrop-blur-xl' : 'bg-transparent'} z-30 transition-all`}>
                 <div className='container h-full flex justify-between items-center'>
                     <Link href='/' className='flex items-center gap-1'>
@@ -40,9 +40,9 @@ const Navbar = () => {
                             width={56}
                             height={40}
                         />
-                        <p className='text-2xl text-secondary'>
+                        <div className='text-2xl text-secondary'>
                             Review Holder
-                        </p>
+                        </div>
                     </Link>
                     <ul className='flex justify-between gap-8 list-none text-primary text-lg max-lg:hidden'>
                         <li>
@@ -81,6 +81,7 @@ const Navbar = () => {
                             <button
                                 onClick={() => setOpenSearchModal(!openSearchModal)}
                                 className={`hover:text-secondary duration-200`}
+                                aria-label='Search'
                             >
                                 <Icon icon="ooui:search" width="20" />
                             </button>

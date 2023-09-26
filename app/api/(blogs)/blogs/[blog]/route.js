@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import Blog from "@/database/models/Blog";
+import User from "@/database/models/User";
 import { dbConnect } from "@/database/dbConnect";
 
 dbConnect();
@@ -7,7 +8,7 @@ dbConnect();
 export const GET = async (req, { params }) => {
     try {
         const pathName = `/${params.blog}`;
-        const blog = await Blog.findOne({ pathName });
+        const blog = await Blog.findOne({ pathName }).populate('author', 'name');
 
         if (!blog) return NextResponse.json(
             { error: `Result not found with this path: "${pathName}"` },

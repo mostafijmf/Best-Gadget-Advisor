@@ -4,7 +4,6 @@ import sharp from "sharp";
 import fs from "fs/promises";
 import { resolve } from 'path';
 import Blog from "@/database/models/Blog";
-import User from "@/database/models/User";
 import { dbConnect } from "@/database/dbConnect";
 import convertStr from "@/libs/convertStr";
 
@@ -15,9 +14,8 @@ dbConnect();
 export const POST = async (req) => {
     try {
         // <!-- Checking user role for admin -->
-        const userId = headers().get('userId');
-        const isUser = await User.findById({ _id: userId });
-        if (isUser.role !== ('admin' || 'sub-admin')) {
+        const { id, role } = JSON.parse(headers().get('userInfo'));
+        if (!['admin', 'sub-admin'].includes(role)) {
             return NextResponse.json({ error: "You are not allowed for this route!" }, { status: 403 })
         };
 
@@ -42,6 +40,7 @@ export const POST = async (req) => {
 
         const data = {
             ...body,
+            author: id,
             coverPhoto_src: `/blogs/cover_photo/${imagePath}`,
             pathName: "/" + convertStr(body.pathName),
         };
@@ -64,9 +63,8 @@ export const POST = async (req) => {
 export const GET = async () => {
     try {
         // <!-- Checking user role for admin -->
-        const userId = headers().get('userId');
-        const isUser = await User.findById({ _id: userId });
-        if (isUser.role !== ('admin' || 'sub-admin')) {
+        const { role } = JSON.parse(headers().get('userInfo'));
+        if (!['admin', 'sub-admin'].includes(role)) {
             return NextResponse.json({ error: "You are not allowed for this route!" }, { status: 403 })
         };
 
@@ -84,14 +82,13 @@ export const GET = async () => {
 export const PATCH = async (req) => {
     try {
         // <!-- Checking user role for admin -->
-        const userId = headers().get('userId');
-        const isUser = await User.findById({ _id: userId });
-        if (isUser.role !== ('admin' || 'sub-admin')) {
+        const { role } = JSON.parse(headers().get('userInfo'));
+        if (!['admin', 'sub-admin'].includes(role)) {
             return NextResponse.json({ error: "You are not allowed for this route!" }, { status: 403 })
         };
 
-        const { id, status } = await req.json();
-        const result = await Blog.findByIdAndUpdate({ _id: id }, {
+        const { id: blogId, status } = await req.json();
+        const result = await Blog.findByIdAndUpdate({ _id: blogId }, {
             $set: {
                 status: status.toLowerCase(),
             }

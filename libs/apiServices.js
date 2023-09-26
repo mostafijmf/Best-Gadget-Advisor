@@ -1,9 +1,14 @@
 import axios from "axios";
 import { notFound } from "next/navigation";
-const url = process.env.CLIENT_URL;
+const url = process.env.NEXT_PUBLIC_BASE_URL;
 
-export const getUser = async () => {
-    const res = await axios.get(`/api/get-user`);
+export const getAuthUser = async () => {
+    const res = await axios.get(`/api/auth-user`);
+    return res.data;
+};
+
+export const updateUserInfo = async (data, otp = '') => {
+    const res = await axios.patch(`/api/auth-user?otp=${otp}`, data);
     return res.data;
 };
 
@@ -55,6 +60,19 @@ export const leaveAReply = async (data) => {
 
 
 // <== Admin API Start ==>
+export const adminAddUser = async (data) => {
+    const res = await axios.post(`/api/admin/add-user`, data);
+    return res.data;
+};
+export const activateUser = async (data) => {
+    const res = await axios.put(`/api/admin/add-user`, data);
+    return res.data;
+};
+export const getAllUsers = async (data) => {
+    const res = await axios.get(`/api/admin/users`, data);
+    return res.data;
+};
+
 export const loginAdmin = async (data) => {
     const res = await axios.post(`/api/admin/login`, data);
     return res.data;

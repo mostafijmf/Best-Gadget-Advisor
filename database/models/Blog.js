@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { ObjectId } = mongoose.Schema.Types;
 
 // <== Schema Design ==>
 const blogSchema = new mongoose.Schema({
@@ -6,6 +7,10 @@ const blogSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please provide a valid title!"],
         trim: true,
+    },
+    author: {
+        type: ObjectId,
+        ref: 'users',
     },
     coverPhoto_src: {
         type: String,

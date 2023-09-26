@@ -39,12 +39,12 @@ const BlogDetails = () => {
                         Edit
                     </Link>
                 </div>
-                <h1 className="text-3xl font-semibold text-center py-4">Blog Details</h1>
+                <h1 className="md:text-3xl text-xl font-semibold text-center py-4">Blog Details</h1>
             </section>
             {loading ?
                 <PageLoading />
                 :
-                <section className="w-full h-auto mt-3 mb-20">
+                <section className="container max-w-[50rem] mx-auto w-full h-auto mt-3 mb-20">
                     {blog ?
                         <BlogPage data={blog} />
                         :

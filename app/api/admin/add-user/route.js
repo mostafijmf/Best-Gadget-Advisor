@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
 import bcrypt from "bcrypt";
+import { SignJWT } from "jose";
 import { dbConnect } from "@/database/dbConnect";
 import User from "@/database/models/User";
+import { activateEmail } from "@/libs/emailSender";
 
 dbConnect();
 
@@ -10,14 +12,42 @@ dbConnect();
 export async function POST(req) {
     try {
         // <!-- Checking user role for admin -->
-        const userId = headers().get('userId');
-        const isUser = await User.findById({ _id: userId });
-        if (isUser.role !== 'admin') {
+        const { role } = JSON.parse(headers().get('userInfo'));
+        if (role !== 'admin') {
             return NextResponse.json({ error: "You are not allowed for this route!" }, { status: 403 })
         };
 
-        const { name, email, password, role } = await req.json();
+        const body = await req.json();
+        if (!body.email) return NextResponse.json({ error: "Email address is required!" }, { status: 403 });
+        if (!body.role) return NextResponse.json({ error: "User Role is required!" }, { status: 403 });
 
+        const existEmail = await User.findOne({ email: body.email });
+        if (existEmail) return NextResponse.json({ error: "This email already exist!" }, { status: 406 });
+
+        const token = await new SignJWT(body)
+            .setProtectedHeader({ alg: 'HS256' })
+            .setIssuedAt()
+            .setExpirationTime('1d')
+            .sign(new TextEncoder().encode(process.env.NEXT_PUBLIC_JWT_ACCESS_TOKEN));
+
+        activateEmail({
+            email: body.email,
+            link: `${process.env.NEXT_PUBLIC_BASE_URL}/admin/active-link?token=${token}`,
+            base_url: process.env.NEXT_PUBLIC_BASE_URL
+        });
+
+        return NextResponse.json({ success: `Request sent to ${body.email} successfully` }, { status: 200 });
+
+    } catch (error) {
+        return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+};
+
+
+// <!-- Activate User Account -->
+export async function PUT(req) {
+    try {
+        const { name, email, password, role, status } = await req.json();
         const existEmail = await User.findOne({ email });
         if (existEmail) return NextResponse.json({ error: "This email already exist!" }, { status: 406 });
 
@@ -28,34 +58,33 @@ export async function POST(req) {
             email,
             password: passwordHash,
             role,
+            status,
         };
-        await User.create(user);
-
-        return NextResponse.json({ success: "Successfully created!" }, { status: 200 });
-
+        const res = await User.create(user);
+        if (res) return NextResponse.json({ success: `Your account created successfully!` }, { status: 200 });
     } catch (error) {
         return NextResponse.json({ error: error.message }, { status: 500 });
     }
 };
 
 
-// <!-- Create an Admin -->
+// <!-- Update account -->
 export async function PATCH(req) {
     try {
         // <!-- Checking user role for admin -->
-        const userId = headers().get('userId');
-        const isUser = await User.findById({ _id: userId });
+        const { id } = JSON.parse(headers().get('userInfo'));
+        const isUser = await User.findById({ _id: id });
         if (isUser.role !== 'admin') {
             return NextResponse.json({ error: "You are not allowed for this route!" }, { status: 403 })
         };
 
-        const { userId: id, password, role } = await req.json();
+        const { userId, password, role } = await req.json();
         const isCorrectPass = await bcrypt.compare(password, isUser.password);
         if (!isCorrectPass) return NextResponse.json({ error: "Incorrect password!" }, { status: 401 });
 
         // <!-- Converting user role admin to sub-admin -->
         const isUpdate = await User.findByIdAndUpdate(
-            { _id: userId },
+            { _id: id },
             {
                 $set: {
                     role: 'sub-admin'
@@ -66,7 +95,7 @@ export async function PATCH(req) {
         // <!-- Converting user role sub-admin to admin -->
         if (isUpdate) {
             const result = await User.findByIdAndUpdate(
-                { _id: id },
+                { _id: userId },
                 {
                     $set: {
                         role: role

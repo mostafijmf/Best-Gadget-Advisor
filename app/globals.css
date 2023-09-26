@@ -27,13 +27,12 @@
         @apply bg-secondary text-black;
     }
 
+    
+    .bg_gradient {
+        @apply bg-gradient-to-l from-gray-50 from-30% via-emerald-50 via-50% to-blue-50 to-70%;
+    }
 }
 
-
-.bg_gradient {
-    background: rgb(250, 245, 255);
-    background: linear-gradient(130deg, rgb(240, 240, 250) 33%, rgb(239, 255, 245) 66%, rgb(249, 239, 255) 99%);
-}
 
 
 /* <!-- Hamburger style start --> */

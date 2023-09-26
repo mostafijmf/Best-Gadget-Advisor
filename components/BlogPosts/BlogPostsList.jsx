@@ -9,7 +9,7 @@ const BlogPostsList = ({ blogs }) => {
         <div className='max-w-4xl w-full flex flex-col md:gap-10 gap-7'>
             {
                 blogs?.map(blog => <>
-                    <div key={blog._id} className='flex items-start gap-7 max-md:hidden'>
+                    <article key={blog._id} className='flex items-start gap-7 max-md:hidden'>
                         <div className='w-max'>
                             <Link href={blog.pathName} className='hover:bg-white'>
                                 <Image
@@ -23,18 +23,20 @@ const BlogPostsList = ({ blogs }) => {
                         </div>
                         <div className='w-[calc(100%-240px)] text-primary'>
                             <div>
-                                <Link href={blog.pathName} className='text-2xl font-semibold hover:underline'>
-                                    {blog.title}
-                                </Link>
+                                <h2>
+                                    <Link href={blog.pathName} className='text-2xl font-semibold hover:underline'>
+                                        {blog.title}
+                                    </Link>
+                                </h2>
                                 <p className='text-lg my-3'>
                                     {blog.metaDescription}
                                 </p>
-                                <p className='text-sm text-gray-500'>
+                                <time className='text-sm text-gray-500'>
                                     {dayjs(blog.createdAt).format("DD-MMM-YYYY")}
-                                </p>
+                                </time>
                             </div>
                         </div>
-                    </div>
+                    </article>
                     <BlogCard key={blog._id} blog={blog} className="md:hidden max-w-sm mx-auto" />
                 </>
                 )

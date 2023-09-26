@@ -51,7 +51,7 @@ const AdminLogin = () => {
     };
 
     return (
-        <div className='overflow-y-auto'>
+        <div className='overflow-y-auto w-full h-screen max-h-full bg_gradient'>
             <div className="container">
                 <form
                     onSubmit={handleLogin}
