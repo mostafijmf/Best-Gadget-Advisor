@@ -33,3 +33,9 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 # Review Holder
+
+## VPS Server
+To run app using pm2:
+```bash
+pm2 start npm --name "nextjs" -- start
+```
