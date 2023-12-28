@@ -26,7 +26,7 @@ export const GET = async () => {
 };
 
 
-
+ 
 // <!-- Update user information -->
 export const PATCH = async (req) => {
     try {

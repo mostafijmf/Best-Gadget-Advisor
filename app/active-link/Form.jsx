@@ -35,7 +35,7 @@ const Form = ({ data }) => {
                     password: formData.password,
                 });
                 res?.success && (
-                    router.push('/admin'),
+                    router.push('/login'),
                     toast.success(res.success, {
                         style: { borderRadius: '8px', background: '#151c48', color: '#fff', maxWidth: '600px', }
                     })

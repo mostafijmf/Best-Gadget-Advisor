@@ -33,7 +33,7 @@ const AddUser = ({ setAddUser }) => {
                     background: '#151c48',
                     color: '#fff',
                 }
-            })
+            });
         }
         finally {
             setLoading(false);

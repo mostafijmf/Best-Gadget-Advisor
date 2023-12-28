@@ -15,10 +15,35 @@ export async function middleware(req) {
     ];
     const apiAdminPath = [
         '/api/auth-user',
-        '/api/admin/add-user',
         '/api/admin/users',
         '/api/admin/blogs'
     ];
+
+
+
+    // <!-- Active link for add user -->
+    if (pathname === '/active-link') {
+        const token = req.nextUrl.searchParams.get("token");
+        try {
+            const { payload } = await jwtVerify(
+                token,
+                new TextEncoder().encode(process.env.NEXT_PUBLIC_JWT_ACCESS_TOKEN)
+            );
+            const response = NextResponse.next();
+            response.headers.set('payload', JSON.stringify(payload));
+            return response;
+
+        } catch (error) {
+            const response = NextResponse.next();
+            if (error.name === 'JWTExpired') {
+                response.headers.set('error', 'The link has been expired!');
+                return response;
+            } else {
+                response.headers.set('error', 'Invalid authentication. Please contact to admin.');
+                return response;
+            }
+        }
+    };
 
 
     // <!-- Verify Token -->
@@ -54,45 +79,18 @@ export async function middleware(req) {
     };
 
 
-    // <!-- Active link for add user -->
-    if (pathname === '/admin/active-link') {
-        const token = req.nextUrl.searchParams.get("token");
-        try {
-            const { payload } = await jwtVerify(
-                token,
-                new TextEncoder()
-                    .encode(process.env.NEXT_PUBLIC_JWT_ACCESS_TOKEN)
-            );
-            const response = NextResponse.next();
-            response.headers.set('payload', JSON.stringify(payload));
-            response.headers.set('userInfo', JSON.stringify(decode));
-            return response;
-
-        } catch (error) {
-            const response = NextResponse.next();
-            if (error.name === 'JWTExpired') {
-                response.headers.set('error', 'The link has been expired!');
-                return response;
-            } else {
-                response.headers.set('error', 'Invalid authentication. Please contact to admin.');
-                return response;
-            }
-        }
-    };
-
 }
 
 // Matching Paths
 export const config = {
     matcher: [
+        '/active-link',
         '/admin',
         '/admin/create-blog',
         '/admin/all-blogs',
         '/admin/users',
-        '/admin/active-link',
         '/admin/settings',
         '/login',
-        '/api/admin/add-user',
         '/api/admin/users',
         '/api/admin/blogs',
         '/api/admin/blogs/:id*',

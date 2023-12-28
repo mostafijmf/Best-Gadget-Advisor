@@ -11,7 +11,7 @@ import Modal from "./Modal";
 const ManageUsers = () => {
     const [users, loading] = useGetAdminAllUsers();
     const [addUser, setAddUser] = useState(false);
-    const [openModal, setOpenModal] = useState(false);
+    const [openModal, setOpenModal] = useState(null);
 
 
     return (<>
@@ -57,53 +57,52 @@ const ManageUsers = () => {
                             </thead>
                             <tbody >
                                 {
-                                    users?.map(user =>
-                                        <tr key={user._id} className={`border-primary ${user === users[users.length - 1] ? 'border-none' : 'border-b'}`}>
-                                            <td className='py-3 px-5'>
-                                                <div className="w-max font-medium capitalize">
-                                                    {user.name}
-                                                </div>
-                                            </td>
-                                            <td className='py-3 pr-5 text-sm'>
-                                                <div className="w-max">
-                                                    {user.email}
-                                                </div>
-                                            </td>
-                                            <td className='py-3 pr-5'>
-                                                <div className="w-max capitalize text-sm">
-                                                    {user.role}
-                                                </div>
-                                            </td>
-                                            <td className='py-3 pr-5'>
-                                                <div className="w-max capitalize text-sm">
-                                                    {dayjs(user.createdAt).format("DD-MMM-YYYY")}
-                                                </div>
-                                            </td>
-                                            <td className='py-3 pr-5'>
-                                                <div className="w-max capitalize text-sm">
-                                                    {user.status === 'active' ?
-                                                        <p className="py-0.5 px-2 rounded flex items-center gap-x-1">
-                                                            <div className="w-2 h-2 rounded-full bg-[#2F9A48]" />
-                                                            {user.status}
-                                                        </p> :
-                                                        <p className="py-0.5 px-2 rounded flex items-center gap-x-1">
-                                                            <div className="w-2 h-2 rounded-full bg-red-500" />
-                                                            {user.status}
-                                                        </p>
-                                                    }
-                                                </div>
-                                            </td>
-                                            <td className='py-3 pr-5'>
-                                                <div className="inline-block">
-                                                    <button
-                                                        onClick={() => setOpenModal(true)}
-                                                        className="w-max hover:bg-gray-200 duration-300 rounded-full p-1.5"
-                                                    >
-                                                        <Icons icon="bi:three-dots-vertical" width={20} />
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                    users?.map(user => <tr key={user._id} className={`border-primary ${user === users[users.length - 1] ? 'border-none' : 'border-b'}`}>
+                                        <td className='py-3 px-5'>
+                                            <div className="w-max font-medium capitalize">
+                                                {user.name}
+                                            </div>
+                                        </td>
+                                        <td className='py-3 pr-5 text-sm'>
+                                            <div className="w-max">
+                                                {user.email}
+                                            </div>
+                                        </td>
+                                        <td className='py-3 pr-5'>
+                                            <div className="w-max capitalize text-sm">
+                                                {user.role}
+                                            </div>
+                                        </td>
+                                        <td className='py-3 pr-5'>
+                                            <div className="w-max capitalize text-sm">
+                                                {dayjs(user.createdAt).format("DD-MMM-YYYY")}
+                                            </div>
+                                        </td>
+                                        <td className='py-3 pr-5'>
+                                            <div className="w-max capitalize text-sm">
+                                                {user.status === 'active' ?
+                                                    <p className="py-0.5 px-2 rounded flex items-center gap-x-1">
+                                                        <div className="w-2 h-2 rounded-full bg-[#2F9A48]" />
+                                                        {user.status}
+                                                    </p> :
+                                                    <p className="py-0.5 px-2 rounded flex items-center gap-x-1">
+                                                        <div className="w-2 h-2 rounded-full bg-red-500" />
+                                                        {user.status}
+                                                    </p>
+                                                }
+                                            </div>
+                                        </td>
+                                        <td className='py-3 pr-5'>
+                                            <div className="inline-block">
+                                                <button
+                                                    onClick={() => setOpenModal(user)}
+                                                    className="w-max hover:bg-gray-200 duration-300 rounded-full p-1.5"
+                                                >
+                                                    <Icons icon="bi:three-dots-vertical" width={20} />
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
                                     )
                                 }
                             </tbody>

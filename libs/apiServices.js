@@ -61,11 +61,15 @@ export const leaveAReply = async (data) => {
 
 // <== Admin API Start ==>
 export const adminAddUser = async (data) => {
-    const res = await axios.post(`/api/admin/add-user`, data);
+    const res = await axios.post(`/api/admin/users`, data);
+    return res.data;
+};
+export const adminDeleteUser = async (id) => {
+    const res = await axios.delete(`/api/admin/users/${id}`);
     return res.data;
 };
 export const activateUser = async (data) => {
-    const res = await axios.put(`/api/admin/add-user`, data);
+    const res = await axios.put(`/api/active-link`, data);
     return res.data;
 };
 export const getAllUsers = async (data) => {
