@@ -2,7 +2,7 @@ import { dbConnect } from "@/database/dbConnect";
 import Blog from "@/database/models/Blog";
 import { NextResponse } from "next/server";
 
-dbConnect();
+dbConnect(); 
 
 // <!-- Get All Blogs -->
 export const GET = async (req) => {

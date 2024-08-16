@@ -9,7 +9,7 @@ import Icons from '@/components/Icons';
 import BlogCard from '@/components/BlogPosts/BlogCard';
 
 export const runtime = "edge";
-
+ 
 const Home = async () => {
   const [
     { blogs: latestBlogs },

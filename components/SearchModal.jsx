@@ -11,7 +11,7 @@ const SearchModal = ({ setOpenSearchModal }) => {
     const [blogs, setBlogs] = useState([]);
     const [noResult, setNoResult] = useState(null);
     const [loading, setLoading] = useState(false);
-
+ 
     // <!-- Fetch blogs -->
     useEffect(() => {
         const delayDebounceFn = setTimeout(() => {

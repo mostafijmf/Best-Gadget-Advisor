@@ -5,7 +5,7 @@ import Blog from "@/database/models/Blog";
 dbConnect();
 
 export const GET = async (req) => {
-    try {
+    try { 
         const query = await req.nextUrl.searchParams.get("query");
         const res = await Blog.find({ title: { $regex: query, $options: 'i' } });
 

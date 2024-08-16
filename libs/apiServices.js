@@ -15,7 +15,7 @@ export const updateUserInfo = async (data, otp = '') => {
 // <!-- Get All Blogs -->
 export const getBlogs = async (query, page = 1, size = 10) => {
     const res = await fetch(`${url}/api/blogs?query=${query}&page=${page}&size=${size}`, {
-        // cache: 'no-store',
+        // cache: 'no-store', 
         next: {
             revalidate: 3
         }
@@ -85,7 +85,7 @@ export const loginAdmin = async (data) => {
 // <!-- Admin Blogs API Start -->
 export const createBlog = async (data) => {
     const res = await axios.post(`/api/admin/blogs`, data);
-    return res.data;
+    return res.data; 
 };
 
 export const getAdminBlogs = async () => {
