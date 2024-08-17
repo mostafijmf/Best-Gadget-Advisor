@@ -7,24 +7,19 @@ export const getAuthUser = async () => {
     return res.data;
 };
 
-export const updateUserInfo = async (data, otp = '') => {
+export const updateUserInfo = async (data, otp = "") => {
     const res = await axios.patch(`/api/auth-user?otp=${otp}`, data);
     return res.data;
 };
 
 // <!-- Get All Blogs -->
-export const getBlogs = async (query, page = 1, size = 10) => {
-    const res = await fetch(`${url}/api/blogs?query=${query}&page=${page}&size=${size}`, {
-        // cache: 'no-store', 
-        next: {
-            revalidate: 3
-        }
-    });
+export const getBlogs = async (query, page = 1, size = 20) => {
+    const res = await fetch(`${url}/api/blogs?query=${query}&page=${page}&size=${size}`, { cache: "no-store" });
 
     const data = await res.json();
     if (!res.ok) throw new Error(data.error);
 
-    return data
+    return data;
 };
 
 // <!-- Get Search Blogs -->
@@ -35,29 +30,19 @@ export const getSearchBlogs = async (query) => {
 
 // <!-- Get Blog By PathName -->
 export const getBlogByPathName = async (pathName) => {
-    const res = await fetch(`${url}/api/blogs/${pathName}`, {
-        cache: 'no-store',
-        // next: {
-        //     revalidate: 3
-        // }
-    });
+    const res = await fetch(`${url}/api/blogs/${pathName}`, { cache: "no-store" });
 
     const data = await res.json();
     if (!res.ok) return notFound();
 
-    return data
+    return data;
 };
-
 
 // <!-- Post leave a reply -->
 export const leaveAReply = async (data) => {
     const res = await axios.post(`/api/leave-a-reply`, data);
     return res.data;
 };
-
-
-
-
 
 // <== Admin API Start ==>
 export const adminAddUser = async (data) => {
@@ -85,7 +70,7 @@ export const loginAdmin = async (data) => {
 // <!-- Admin Blogs API Start -->
 export const createBlog = async (data) => {
     const res = await axios.post(`/api/admin/blogs`, data);
-    return res.data; 
+    return res.data;
 };
 
 export const getAdminBlogs = async () => {
@@ -120,9 +105,8 @@ export const getBlogPathName = async (query) => {
 // <!-- Admin Blogs API End -->
 // <== Admin API End ==>
 
-
 // <!-- Logout -->
 export const logout = async () => {
     const res = await axios.post(`/api/logout`);
-    return res.data
+    return res.data;
 };
