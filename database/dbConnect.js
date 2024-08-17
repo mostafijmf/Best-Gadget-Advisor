@@ -1,12 +1,12 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 // database connection
-export async function dbConnect() {
+export const dbConnect = async () => {
     await mongoose.connect(process.env.NEXT_PUBLIC_DB_URL)
         .then(() => {
-            console.log('Database is connected.');
+            console.log(`Database is connected`);
         })
         .catch((error) => {
-            console.log(error);
-        })
+            console.error(error);
+        });
 };
